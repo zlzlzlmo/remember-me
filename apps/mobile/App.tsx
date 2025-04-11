@@ -1,17 +1,25 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { auth } from "./firebase";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { StyleSheet, View } from "react-native";
+import LandingScreen from "./screens/LandingScreen";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello This is Remember-App</Text>
-      <StatusBar style="auto" />
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Firebase 연결 성공 ✅</Text>
-        <Text>현재 유저: {auth.currentUser?.uid ?? "없음"}</Text>
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Landing">
+        {/* 기본 스크린 */}
+        <Stack.Screen
+          name="Landing"
+          component={LandingScreen}
+          options={{ headerShown: false }}
+        />
+        {/* 추후 추가할 스크린 예시 */}
+        {/* <Stack.Screen name="MainScreen" component={MainScreen} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
